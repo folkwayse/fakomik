@@ -1,11 +1,11 @@
 <script setup>
-import Header from "./components/Header.vue";
+import HeaderComponent from "~/components/Header.vue";
 </script>
 
 <template>
   <div>
     <nav class="mb-4">
-      <Header />
+      <HeaderComponent/>
     </nav>
     <NuxtPage />
   </div>
