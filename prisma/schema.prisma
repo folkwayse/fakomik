@@ -1,0 +1,117 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 1. Manga table migration
+model Manga {
+  id                String    @id @default(uuid())
+  title             String
+  language          String
+  alternative_title String
+  rating            Float
+  description       String
+  start_chapters    String
+  last_chapters     String
+  status            String
+  type              String
+  release_year      Int
+  author            String
+  artist            String
+  serialization     String
+  views             Int
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  genre             Genre[]
+  chaptes           Chapter[]
+  History           History[]
+}
+
+// 2. Genre table migration
+model Genre {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  isMature    Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  manga       Manga[]
+}
+
+// 3. Manga_genre table migration
+//model GenresOnMangas  {
+//  id        String   @id @default(uuid())
+//  manga_id  String
+//  genre_id  String
+//  createdAt DateTime @default(now())
+//  updatedAt DateTime @updatedAt
+//  genre Genre[] @relation(fields: [genre_id], references: [id])
+//  manga Manga[] @relation(fields: [manga_id], references: [id])
+//}
+
+// 4. Chapter table migration
+model Chapter {
+  id               String             @id @default(uuid())
+  manga_id         String
+  name             String
+  chapter_number   Float
+  description      String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  manga            Manga              @relation(fields: [manga_id], references: [id])
+  Chapter_contents Chapter_contents[]
+}
+
+// 5. Chapter_contents table migration
+model Chapter_contents {
+  id         String   @id @default(uuid())
+  chapter_id String
+  contents   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  chapter    Chapter  @relation(fields: [chapter_id], references: [id])
+}
+
+// 6. User table migration
+model User {
+  id        String     @id @default(uuid())
+  username  String
+  email     String
+  password  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Bookmark  Bookmark[]
+  History   History[]
+}
+
+// 7. Bookmark table migration
+model Bookmark {
+  id           String   @id @default(uuid())
+  user_id      String
+  manga_id     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  BookmarkedBy User     @relation(fields: [user_id], references: [id])
+}
+
+// 8. History table migration
+model History {
+  id          String   @id @default(uuid())
+  user_id     String
+  chapter_id  String
+  manga_id    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userreaded  User     @relation(fields: [user_id], references: [id])
+  mangareaded Manga    @relation(fields: [manga_id], references: [id])
+}
