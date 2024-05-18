@@ -18,7 +18,14 @@ export default defineNuxtConfig({
     cssLayerOrder: "reset,primevue",
   },
   css: ["primevue/resources/themes/aura-dark-indigo/theme.css"],
+
   disqus: {
     shortname: "fakomik",
   },
+  runtimeConfig: {
+    public: {
+      baseURL: process.env.API_URL || 'https://api.example.com/',
+    },
+  },
+ 
 });
