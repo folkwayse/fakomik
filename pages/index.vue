@@ -1,11 +1,9 @@
 <template>
-  <GenreSlider />
-  <HomeRekomendasi />
-  <HomeRekomendasi />
-  <HomeRekomendasi />
+  
+  <MangaUpdate/>
 </template>
 
 <script setup>
-import HomeRekomendasi from "../components/HomeRekomendasi.vue";
-import GenreSlider from '~/components/GenreSlider.vue';
+import MangaUpdate from "~/components/MangaUpdate.vue";
+
 </script>
