@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app : {pageTransition: { name: "page", mode: "out-in" },},
   devServer: {
     port: 4000,
   },
@@ -12,7 +13,7 @@ export default defineNuxtConfig({
     "nuxt-simple-robots",
     "nuxt-disqus",
     "nuxt-primevue",
-    '@pinia/nuxt',
+    "@pinia/nuxt",
   ],
   primevue: {
     cssLayerOrder: "reset,primevue",
@@ -24,8 +25,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      baseURL: process.env.API_URL || 'https://api.example.com/',
+      baseURL: process.env.API_URL || "https://api.example.com/",
     },
   },
- 
 });
