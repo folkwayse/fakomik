@@ -1,13 +1,24 @@
 <template>
   
     <section>
+      
       <div class="container w-full m-auto">
         <img
-          v-for="i in 5"
+          v-for="i in chapter.Chapter.content"
           :key="i"
           class="w-full p-0 m-0 object-fill"
-          src="https://cdn.myanimelist.net/images/anime/1758/141268.jpg"
+          :src="i"
         />
       </div>
     </section>
 </template>
+
+<script setup>
+
+const { params } = useRoute();
+const slug = params.slug;
+const config = useRuntimeConfig();
+const {data:chapter , error} = await useFetch(() => `${config.public.baseURL}chapters/getchapter/${slug}`);
+// console.log(chapter);
+
+</script>

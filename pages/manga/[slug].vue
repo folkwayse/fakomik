@@ -1,14 +1,21 @@
 <template>
   <article>
 
-    <DetailManga />
-    <ChapterList/>
+    <DetailManga
+    :slug="slug"
+    />
+   
     <MangaRekomendasi/>
   </article>
 </template>
 
 <script setup>
 import DetailManga from "~/components/DetailManga.vue";
-import ChapterList from "~/components/ChapterList.vue";
+
 import MangaRekomendasi from "~/components/MangaRekomendasi.vue";
+
+// get router params
+const route = useRoute();
+const slug = route.params.slug;
+
 </script>
