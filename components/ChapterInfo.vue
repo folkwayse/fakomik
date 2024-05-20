@@ -7,6 +7,9 @@
           <h1 class="text-2xl font-bold">
             {{ data.Chapter.name }}
           </h1>
+        
+        </template>
+        <template #footer>
           <h3>
             Baca manga {{ data.Chapter.name }}  terbaru di
             Fakomik ID. Manga {{ data.Chapter.manga.title }} bahasa Indonesia selalu update di

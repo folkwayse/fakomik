@@ -1,6 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  app : {pageTransition: { name: "page", mode: "out-in" },},
+  app : {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+    },
+    pageTransition: { name: "page", mode: "out-in" },},
   devServer: {
     port: 4000,
   },
@@ -8,13 +13,23 @@ export default defineNuxtConfig({
   ssr: true,
   devtools: { enabled: false },
   modules: [
+    
     "@nuxtjs/sitemap",
     "@nuxtjs/tailwindcss",
     "nuxt-simple-robots",
     "nuxt-disqus",
     "nuxt-primevue",
     "@pinia/nuxt",
+    '@nuxtjs/seo'
+    
   ],
+  site: {
+    url: 'https://fakomik.cloud',
+    name: 'Fakomik Cloud',
+    description: 'Tempat Baca Komik Manga Manhua Manhwa Bahasa Indonesia',
+    defaultLocale: 'id', // not needed if you have @nuxtjs/i18n installed
+  },
+
   primevue: {
     cssLayerOrder: "reset,primevue",
   },
