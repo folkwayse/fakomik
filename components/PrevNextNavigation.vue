@@ -5,6 +5,7 @@
       <template #footer>
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-2">
+            
             <NuxtLink
               v-if="chapterData && chapterData.prev"
               :to="`/chapters/${chapterData.prev.slug}`"
