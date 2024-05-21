@@ -1,6 +1,6 @@
 <template>
   <article>
-    <Breadcumbs />
+ 
     <DetailManga
     :slug="slug"
     />
@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import Breadcumbs from "~/components/Breadcumbs.vue";
+
 import DetailManga from "~/components/DetailManga.vue";
 
 import MangaRekomendasi from "~/components/MangaRekomendasi.vue";

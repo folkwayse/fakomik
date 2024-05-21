@@ -3,11 +3,13 @@
     <section>
       
       <div class="container w-full m-auto">
+       
         <img
-          v-for="i in chapter.Chapter.content"
+          v-for="(i, index) in chapter.Chapter.content"
           :key="i"
           class="w-full p-0 m-0 object-fill"
           :src="i"
+          :alt="`${chapter.Chapter.name} segment ${index+1}`"
         />
       </div>
     </section>
