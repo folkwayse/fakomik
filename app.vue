@@ -3,7 +3,7 @@ import HeaderComponent from "~/components/Header.vue";
 </script>
 
 <template>
-  <div>
+  <div class="bg-gray-800 text-white min-h-screen">
     <nav class="mb-4">
       <HeaderComponent/>
     </nav>

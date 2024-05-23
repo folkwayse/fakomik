@@ -1,4 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+interface Chapter {
+  url: string;
+  changefreq?: string;
+  priority?: number;
+}
+
 export default defineNuxtConfig({
   app: {
     head: {
@@ -13,16 +19,23 @@ export default defineNuxtConfig({
 
   ssr: true,
 
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   modules: [
     "@nuxtjs/sitemap",
-    "@nuxtjs/tailwindcss",
     "nuxt-simple-robots",
     "nuxt-disqus",
-    "nuxt-primevue",
     "@pinia/nuxt",
     "@nuxtjs/seo",
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt', // needed
+    '@pinia-plugin-persistedstate/nuxt',
   ],
+  piniaPersistedstate: {
+    cookieOptions: {
+      sameSite: 'strict',
+    },
+    storage: 'localStorage'
+  },
   site: {
     url: "https://fakomik.cloud",
     name: "Fakomik Cloud",
@@ -30,21 +43,36 @@ export default defineNuxtConfig({
     defaultLocale: "id", // not needed if you have @nuxtjs/i18n installed
   },
   sitemap: {
-    urls: async () => {
-      const config = useRuntimeConfig();
-      // fetch your URLs from a database or other source
-      const response = await fetch(config.public.baseURL + "sitemaps/chapters");
-      const data = await response.json();
-      return data;
+    // Asynchronously fetch URLs for the sitemap
+    async urls() {
+      const apiUrl = process.env.API_URL + "sitemaps/chapters"
+      try {
+        // Fetch data from the API endpoint
+        const response = await fetch(apiUrl);
+
+        // Check if the response is ok
+        if (!response.ok) {
+          throw new Error(`Failed to fetch sitemap data: ${response.statusText}`);
+        }
+
+        // Parse the response as JSON
+        const data = await response.json();
+
+        // Ensure the data is in the correct format for the sitemap
+        return data.map((chapter: Chapter) => ({
+          url: chapter.url, // Adjust according to the structure of your data
+          changefreq: chapter.changefreq || 'weekly', // Default value if not provided
+          priority: chapter.priority || 0.8 // Default value if not provided
+        }));
+      } catch (error) {
+        // Log the error and return an empty array if fetching fails
+        console.error(`Error fetching sitemap data from ${apiUrl}:`, error);
+        return [];
+      }
     },
+    // Set sitemaps to true to generate the sitemap
     sitemaps: true,
   },
-
-  primevue: {
-    cssLayerOrder: "reset,primevue",
-  },
-  css: ["primevue/resources/themes/aura-dark-indigo/theme.css"],
-
   disqus: {
     shortname: "fakomik",
   },

@@ -23,12 +23,7 @@
               </button>
               <div class="text-sm">Followed by 4636 people</div>
               <div class="flex justify-center items-center mt-2">
-                <Rating
-                  v-model="value"
-                  readonly
-                  :cancel="false"
-                  class="text-yellow-500"
-                />
+               
                 <span class="ml-2 text-xs">7.00</span>
               </div>
             </div>
@@ -42,11 +37,11 @@
               {{ manga.description }}
             </p>
             <div
-              class="flex flex-col sm:flex-row items-center sm:justify-start mb-4"
+              class="justify-center items-center flex flex-wrap mb-4"
             >
               <NuxtLink :to="`/chapters/${manga.chapter[manga.chapter.length - 1].slug}`">
                 <span class="bg-gray-700 text-white px-4 py-2 rounded m-1"
-                  >Mulai : Chapter
+                  > Chapter
                   {{
                     manga.chapter[manga.chapter.length - 1].chapter_number
                   }}</span
@@ -54,7 +49,7 @@
               </NuxtLink>
               <NuxtLink :to="`/chapters/${manga.chapter[0].slug}`">
               <span class="bg-gray-700 text-white px-4 py-2 rounded m-1"
-                >Terbaru: Chapter {{ manga.chapter[0].chapter_number }}</span
+                >Chapter {{ manga.chapter[0].chapter_number }}</span
               >
             </NuxtLink>
             </div>
@@ -90,23 +85,12 @@
       </div>
     </section>
     <section class="container mx-auto p-4 lg:w-2/3">
-      <Listbox
-        :options="manga.chapter"
-        filter
-        listStyle="max-height:250px"
-        optionLabel="name"
-        class="w-full bg-gray-800"
-      >
-        <template #option="slotProps">
-          <NuxtLink :to="`/chapters/${slotProps.option.slug}`">
-            <div class="flex items-center">
-              <span class="mr-2"
-                >Chapter {{ slotProps.option.chapter_number }}</span
-              >
-            </div>
-          </NuxtLink>
-        </template>
-      </Listbox>
+     Daftar Chapters : 
+     <ul class="list-disc  max-h-96 overflow-auto">
+      <NuxtLink v-for="i in manga.chapter" :key="i.slug" :to="`/chapters/${i.slug}`">
+        <li class="text-gray-200 p-2">Chapter {{ i.chapter_number }}</li>
+      </NuxtLink>
+     </ul>
     </section>
   </div>
 </template>
@@ -121,7 +105,7 @@ const props = defineProps({
   },
 });
 
-import Rating from "primevue/rating"; // Pastikan Anda telah menginstal primevue
+
 import { makeItjetPack } from "~/utils/jetpack";
 import { formatDate } from "~/utils/date";
 const { data: manga, error } = await useFetch(() => `/api/manga/${props.slug}`);

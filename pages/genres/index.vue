@@ -1,3 +1,3 @@
 <template>
-  chapter list
+    genres
 </template>

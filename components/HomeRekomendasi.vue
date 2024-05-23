@@ -38,12 +38,7 @@
           </h3>
           <span class="text-xs font-bold px-2 block"> Chapter 20 </span>
           <div class="flex items-center px-2 py-1">
-            <Rating
-              v-model="value"
-              readonly
-              :cancel="false"
-              class="text-yellow-500"
-            />
+           
             <span class="ml-2 text-xs">8.55</span>
           </div>
         </article>
@@ -53,8 +48,7 @@
   
   <script setup>
   import { ref } from "vue";
-  import Rating from "primevue/rating"; // Pastikan Anda telah menginstal primevue
-  
+
   const value = ref(3);
   </script>
   
