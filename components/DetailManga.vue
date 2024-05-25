@@ -3,6 +3,7 @@
     <Breadcumbs 
    
     :title="manga.title"
+    :slug="`manga/${manga.slug}`"
     />
     <section class="container mx-auto p-4 lg:w-2/3">
       <div class="bg-gray-800 text-white rounded-lg shadow-lg p-6">
