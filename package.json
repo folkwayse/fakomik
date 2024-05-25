@@ -22,6 +22,7 @@
     "@prisma/client": "^5.13.0",
     "drizzle-orm": "^0.30.10",
     "nuxt": "^3.11.2",
+    "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-jsonld": "^2.0.8",
     "nuxt-simple-robots": "^4.0.0-rc.17",
     "pg": "^8.11.5",

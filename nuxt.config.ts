@@ -31,8 +31,13 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     'nuxt-jsonld',
     '@nuxt/image',
+    'nuxt-cloudflare-analytics'
     
   ],
+  cloudflareAnalytics: {
+    // See below for more options
+    token: 'e269b38640754256852aa52657164770', // Example 1a2b3v4a5er6ac7r8afd
+  },
   piniaPersistedstate: {
     cookieOptions: {
       sameSite: "strict",
