@@ -1,5 +1,6 @@
 <template>
   <main>
+   
     <ChapterInfo />
     <PrevNextNavigation></PrevNextNavigation>
     <ChapterContent/>
@@ -11,6 +12,7 @@
   </main>
 </template>
 <script setup>
+
 import ChapterInfo from "~/components/ChapterInfo.vue";
 import ChapterList from "~/components/ChapterList.vue";
 import ChapterContent from "~/components/ChapterContent.vue";

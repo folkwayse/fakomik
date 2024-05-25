@@ -1,6 +1,7 @@
 <template>
   <section>
     <div class="container mx-auto p-4 lg:w-2/3">
+      <Breadcumbs :title="data.Chapter.name" :slug="`chapters/${data.Chapter.slug}`"/>
       <div class="shadow-md rounded-lg p-6">
         <div v-if="data">
           <h1 class="text-2xl font-bold mb-4">{{ data.Chapter.name }}</h1>
@@ -16,6 +17,7 @@
 </template>
 
 <script setup>
+import Breadcumbs from "~/components/Breadcumbs.vue";
 import { ref } from "vue";
 // implementasi watch history dan add views
 import {useHistoryStore} from "~/store/historyStore";
@@ -37,5 +39,29 @@ const { data, pending, error, refresh } = useAsyncData(
 );
 
 
+useJsonld(() => ({
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  'headline': data.value?.Chapter?.name,
+  'description': data.value?.Chapter?.manga?.description,
+  'author': {
+    '@type': 'Person',
+    'name': data.value?.Chapter?.manga?.author
+  },
+  'datePublished': data.value?.Chapter?.createdAt,
+  'image': data.value?.Chapter?.manga?.poster,
+  'mainEntityOfPage': {
+    '@type': 'WebPage',
+    '@id': `${config.public.homeUrl}chapters/${data.value?.Chapter?.slug}`
+  },
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'Fakomik ID',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://example.com/logo.png'
+    }
+  }
+}));
 
 </script>

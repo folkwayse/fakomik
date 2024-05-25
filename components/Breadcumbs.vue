@@ -39,6 +39,39 @@ const props = defineProps({
     type: String,
     required: true,
   },
+
+  slug: {
+    type: String,
+    required: true,
+  },
 });
+
+const config = useRuntimeConfig();
+const Home_url = config.public.homeUrl;
+useJsonld(() => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Home',
+      'item': Home_url
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Manga',
+      'item': Home_url+'manga'
+    },
+    {
+      '@type': 'ListItem',
+      'position': 3,
+      'name': props.title,
+      'item': `${Home_url}${props.slug}`
+    }
+  ]
+}));
+
 
 </script>

@@ -14,7 +14,7 @@
             <img
               class="w-full h-48 object-cover"
               alt="Manga Cover"
-              :src="makeItjetPack(i.poster)"
+              :src="makeItjetPack(i.poster, 100,100)"
             />
           </nuxt-link>
         </header>
@@ -74,5 +74,20 @@ const mangas = ref([]);
 const { data: mangaData, error } = await useFetch("/api/manga/newmanga");
 if (mangaData.value) {
   mangas.value = mangaData.value.mangas;
+  
 }
+useJsonld(() => {
+  if (mangas.value.length) {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      'itemListElement': mangas.value.map((manga, index) => ({
+        '@type': 'ListItem',
+        'position': index + 1,
+        'url': `/manga/${manga.slug}`,
+        'name': manga.title,
+      })),
+    };
+  }
+});
 </script>
