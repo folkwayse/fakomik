@@ -11,14 +11,17 @@
       >
         <header class="w-full mx-auto mb-2">
           <nuxt-link :to="`/manga/${i.slug}`">
-            <img
+            <NuxtImg
               class="w-full h-48 object-cover"
               alt="Manga Cover"
-              :src="makeItjetPack(i.poster, 100,100)"
+              :src="i.poster"
+              loading="lazy"
+              format="webp"
+              sizes="sm:50vw md:400px"
             />
           </nuxt-link>
         </header>
-        
+
         <NuxtLink :to="`/manga/${i.slug}`">
           <h3 class="text-sm font-bold p-2 truncate">
             {{ i.title }}
@@ -74,18 +77,17 @@ const mangas = ref([]);
 const { data: mangaData, error } = await useFetch("/api/manga/newmanga");
 if (mangaData.value) {
   mangas.value = mangaData.value.mangas;
-  
 }
 useJsonld(() => {
   if (mangas.value.length) {
     return {
-      '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      'itemListElement': mangas.value.map((manga, index) => ({
-        '@type': 'ListItem',
-        'position': index + 1,
-        'url': `/manga/${manga.slug}`,
-        'name': manga.title,
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      itemListElement: mangas.value.map((manga, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `/manga/${manga.slug}`,
+        name: manga.title,
       })),
     };
   }
