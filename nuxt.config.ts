@@ -29,13 +29,30 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@pinia/nuxt", // needed
     "@pinia-plugin-persistedstate/nuxt",
-    'nuxt-jsonld'
+    'nuxt-jsonld',
+    '@nuxt/image',
+    
   ],
   piniaPersistedstate: {
     cookieOptions: {
       sameSite: "strict",
     },
     storage: "localStorage",
+  },
+  image: {
+    domains: ['image.fakomik.cloud'],
+    // Options
+    provider: "ipx",
+    screens: {
+      'xs': 320,
+      'sm': 640,
+      'md': 768,
+      'lg': 1024,
+      'xl': 1280,
+      'xxl': 1536,
+      '2xl': 1536
+    },
+    format: ['webp'],
   },
   site: {
     url: "https://fakomik.cloud",
