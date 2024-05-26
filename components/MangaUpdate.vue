@@ -16,8 +16,6 @@
               alt="Manga Cover"
               :src="i.poster"
               loading="lazy"
-              format="webp"
-              sizes="sm:50vw md:400px"
             />
           </nuxt-link>
         </header>

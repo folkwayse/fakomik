@@ -11,10 +11,8 @@
           :alt="`${chapter.Chapter.name} segment ${index + 1}`"
           @load="LoadedImages"
           loading="lazy"
-          format="jpg"
           @error="errorImages(index)"
           @click="setCurrentSegment(index)"
-          sizes="sm:50vw md:400px"
         />
         <button 
           v-if="errorIndexes.includes(index)" 
