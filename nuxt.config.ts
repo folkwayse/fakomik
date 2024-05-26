@@ -57,7 +57,7 @@ export default defineNuxtConfig({
       'xxl': 1536,
       '2xl': 1536
     },
-    format: ['webp'],
+    format: ['jpg','webp'],
   },
   site: {
     url: "https://fakomik.cloud",
