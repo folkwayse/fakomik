@@ -52,21 +52,18 @@ useJsonld(() => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
+   
     {
       "@type": "ListItem",
       position: 1,
-      name: "Home",
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
       name: "Manga",
       item: Home_url + "/manga",
     },
     {
       "@type": "ListItem",
-      position: 3,
+      position: 2,
       name: props.title,
+      item: Home_url + "/manga/" + props.slug,
     },
   ],
 }));
