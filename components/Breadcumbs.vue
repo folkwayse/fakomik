@@ -46,25 +46,34 @@ const props = defineProps({
   },
 });
 
+// Mengambil konfigurasi runtime
 const config = useRuntimeConfig();
-const Home_url = config.public.homeUrl;
-useJsonld(() => ({
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-   
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Manga",
-      item: Home_url + "/manga",
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: props.title,
-      item: Home_url + "/manga/" + props.slug,
-    },
-  ],
-}));
+const Home_url = config?.public?.homeUrl || '';
+
+// Membuat structured data untuk breadcrumb
+useJsonld(() => {
+  if (!Home_url) {
+    console.error('Home URL is not defined.');
+    return null; // Tidak ada structured data jika Home_url tidak terdefinisi
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Manga",
+        item: `${Home_url}/manga`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: props.title,
+        item: `${Home_url}/${props.slug}`,
+      },
+    ],
+  };
+});
 </script>
