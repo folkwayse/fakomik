@@ -39,29 +39,5 @@ const { data, pending, error, refresh } = useAsyncData(
 );
 
 
-useJsonld(() => ({
-  '@context': 'https://schema.org',
-  '@type': 'NewsArticle',
-  'headline': data.value?.Chapter?.name,
-  'description': data.value?.Chapter?.manga?.description,
-  'author': {
-    '@type': 'Person',
-    'name': data.value?.Chapter?.manga?.author
-  },
-  'datePublished': data.value?.Chapter?.createdAt,
-  'image': data.value?.Chapter?.manga?.poster,
-  'mainEntityOfPage': {
-    '@type': 'WebPage',
-    '@id': `${config.public.homeUrl}chapters/${data.value?.Chapter?.slug}`
-  },
-  'publisher': {
-    '@type': 'Organization',
-    'name': 'Fakomik ID',
-    'logo': {
-      '@type': 'ImageObject',
-      'url': 'https://example.com/logo.png'
-    }
-  }
-}));
 
 </script>

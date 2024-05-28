@@ -11,9 +11,9 @@
           <div class="md:w-1/3 mb-4 md:mb-0">
             <figure>
               <img
-                class="w-1/2 h-auto m-auto object-cover rounded-lg"
+                class="w-full h-auto m-auto object-cover rounded-lg"
                 alt="The Demon Prince goes to the Academy"
-                :src="makeItjetPack(manga.poster)"
+                :src="manga.poster"
               />
             </figure>
             <div class="mt-4 text-center">
@@ -22,10 +22,10 @@
               >
                 Bookmark
               </button>
-              <div class="text-sm">Followed by 4636 people</div>
+             
               <div class="flex justify-center items-center mt-2">
-               
-                <span class="ml-2 text-xs">7.00</span>
+        
+                <span class="ml-2 text-xs">{{ manga.rating }} / 100</span>
               </div>
             </div>
           </div>
