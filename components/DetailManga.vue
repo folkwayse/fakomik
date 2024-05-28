@@ -110,4 +110,14 @@ const props = defineProps({
 import { makeItjetPack } from "~/utils/jetpack";
 import { formatDate } from "~/utils/date";
 const { data: manga, error } = await useFetch(() => `/api/manga/${props.slug}`);
+useJsonld(() => {
+  if (manga.value) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: manga.value.title,
+      url: `https://fakomik.id/manga/${manga.value.slug}`,
+    };
+  }
+})
 </script>

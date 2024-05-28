@@ -45,40 +45,27 @@ const props = defineProps({
     required: true,
   },
 });
+
 const config = useRuntimeConfig();
 
-// Membuat structured data untuk breadcrumb setelah Home_url tersedia
-const createJsonLdData = () => {
-  const Home_url = config?.public?.homeUrl || '';
-  
-  if (!Home_url) {
-    console.error('Home URL is not defined.');
-    return null; // Tidak ada structured data jika Home_url tidak terdefinisi
-  }
+// Access baseURL universally
+const homeUrl = config.public.homeUrl;
 
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Manga",
-        item: `${Home_url}manga`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: props.title,
-        item: `${Home_url}${props.slug}`,
-      },
-    ],
-  };
-};
-
-// Membuat structured data ketika Home_url tersedia
-const jsonLdData = createJsonLdData();
-
-// Menggunakan useJsonld dengan data yang telah dibuat
-useJsonld(() => jsonLdData);
+useJsonld(() => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Manga",
+      item: homeUrl + "manga",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: props.title,
+    },
+  ],
+}));
 </script>
