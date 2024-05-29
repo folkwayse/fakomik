@@ -46,7 +46,7 @@ const props = defineProps({
   },
 });
 
-const config = await useRuntimeConfig();
+const config = useRuntimeConfig();
 
 // Access baseURL universally
 const homeUrl = config.public.homeUrl;

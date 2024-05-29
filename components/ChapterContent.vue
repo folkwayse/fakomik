@@ -97,8 +97,8 @@ useJsonld(() => {
       "@context": "https://schema.org",
       "@type": "Article",
       headline: chapter.value.Chapter.manga.title,
-      datePublished: "2020-07-16T12:54:58",
-      dateModified: "2024-05-25T04:55:27",
+      datePublished: chapter.value.Chapter.createdAt,
+      dateModified: chapter.value.Chapter.updatedAt,
       description:
         chapter.value.Chapter.name +
         " - " +
