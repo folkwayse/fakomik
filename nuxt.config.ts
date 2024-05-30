@@ -10,6 +10,9 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
+      link: [
+        { rel: 'canonical', href: 'https://www.fakomik.cloud' } // Atur URL yang benar di sini
+      ]
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
@@ -46,6 +49,9 @@ export default defineNuxtConfig({
   },
   image: {
 
+  },
+  robots: {
+    disallow : ["/api/*",'/upload','_nuxt/','sender','session'],
   },
   site: {
     url: "https://fakomik.cloud",
