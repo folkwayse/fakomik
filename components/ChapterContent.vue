@@ -18,7 +18,7 @@
         class="relative"
       >
         <NuxtImg
-        @contextmenu.prevent
+          @contextmenu.prevent
           class="w-full p-0 m-0 object-fill"
           :src="getImageSrc(i, index)"
           :alt="`${chapter.Chapter.name} segment ${index + 1}`"
@@ -75,7 +75,7 @@ const reloadImage = (index) => {
 
 const setCurrentSegment = (index) => {
   currentSegment.value = index;
-  console.log(index);
+  // console.log(index);
   window.scrollBy({
     top: 250,
     behavior: "smooth",
@@ -91,8 +91,6 @@ const getImageSrc = (i, index) => {
 
 useJsonld(() => {
   if (chapter.value) {
-    
-
     return {
       "@context": "https://schema.org",
       "@type": "Article",
@@ -140,5 +138,12 @@ useJsonld(() => {
 // implementasi watch history dan add views
 import { useHistoryStore } from "~/store/historyStore";
 const historyStore = useHistoryStore();
-historyStore.addHistory(slug, chapter.value.Chapter.name);
+
+if (chapter.value) {
+  historyStore.addHistory(
+    chapter.value.Chapter.manga.id,
+    chapter.value.Chapter.slug
+  );
+  // console.log('history added')
+}
 </script>

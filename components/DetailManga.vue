@@ -1,10 +1,6 @@
 <template>
   <div>
-    <Breadcumbs 
-   
-    :title="manga.title"
-    :slug="`manga/${manga.slug}`"
-    />
+    <Breadcumbs :title="manga.title" :slug="`manga/${manga.slug}`" />
     <section class="container mx-auto p-4 lg:w-2/3">
       <div class="bg-gray-800 text-white rounded-lg shadow-lg p-6">
         <div class="flex flex-col md:flex-row">
@@ -19,14 +15,21 @@
             <div class="mt-4 text-center">
               <button
                 class="bg-purple-600 text-white px-4 py-2 rounded mb-2 w-full"
+                @click="toggleBookmark"
               >
-                Bookmark
+                {{ isBookmarked ? "Remove Bookmark" : "Bookmark" }}
               </button>
-             
-              <div class="flex justify-center items-center mt-2">
-        
-                <span class="ml-2 text-xs">{{ manga.rating }} / 100</span>
+
+              <div class="flex justify-center items-center m-2">
+                <span class="m-2 text-xs">{{ manga.rating }} / 100</span>
               </div>
+              <NuxtLink v-if="lasread" :to="`/chapters/${lasread}`">
+                <button
+                  class="bg-purple-600 text-white px-4 py-2 rounded mb-2 w-full"
+                >
+                  Lanjut Baca
+                </button>
+              </NuxtLink>
             </div>
           </div>
           <div class="md:w-2/3 md:pl-6">
@@ -37,22 +40,24 @@
             <p class="text-sm mb-4">
               {{ manga.description }}
             </p>
-            <div
-              class="justify-center items-center flex flex-wrap mb-4"
-            >
-              <NuxtLink :to="`/chapters/${manga.chapter[manga.chapter.length - 1].slug}`">
-                <span class="bg-gray-700 text-white px-4 py-2 rounded m-1"
-                  > Chapter
+            <div class="justify-center items-center flex flex-wrap mb-4">
+              <NuxtLink
+                :to="`/chapters/${
+                  manga.chapter[manga.chapter.length - 1].slug
+                }`"
+              >
+                <span class="bg-gray-700 text-white px-4 py-2 rounded m-1">
+                  Chapter
                   {{
                     manga.chapter[manga.chapter.length - 1].chapter_number
                   }}</span
                 >
               </NuxtLink>
               <NuxtLink :to="`/chapters/${manga.chapter[0].slug}`">
-              <span class="bg-gray-700 text-white px-4 py-2 rounded m-1"
-                >Chapter {{ manga.chapter[0].chapter_number }}</span
-              >
-            </NuxtLink>
+                <span class="bg-gray-700 text-white px-4 py-2 rounded m-1"
+                  >Chapter {{ manga.chapter[0].chapter_number }}</span
+                >
+              </NuxtLink>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div>
@@ -74,11 +79,15 @@
             </div>
             <div class="mt-4">
               <div class="flex flex-wrap gap-2">
-                <span
+                <NuxtLink
                   v-for="genre in manga.genre"
-                  class="bg-gray-700 text-white px-4 py-1 rounded"
-                  >{{ genre.name }}</span
+                  :key="genre.slug"
+                  :to="`/genres/${genre.slug}`"
                 >
+                  <span class="bg-gray-700 text-white px-4 py-1 rounded">{{
+                    genre.name
+                  }}</span>
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -86,18 +95,27 @@
       </div>
     </section>
     <section class="container mx-auto p-4 lg:w-2/3">
-     Daftar Chapters : 
-     <ul class="list-disc  max-h-96 overflow-auto">
-      <NuxtLink v-for="i in manga.chapter" :key="i.slug" :to="`/chapters/${i.slug}`">
-        <li class="text-gray-200 p-2">Chapter {{ i.chapter_number }}</li>
-      </NuxtLink>
-     </ul>
+      Daftar Chapters :
+      <ul class="list-disc max-h-96 overflow-auto">
+        <NuxtLink
+          v-for="i in manga.chapter"
+          :key="i.slug"
+          :to="`/chapters/${i.slug}`"
+        >
+          <li class="text-gray-200 p-2">Chapter {{ i.chapter_number }}</li>
+        </NuxtLink>
+      </ul>
     </section>
   </div>
 </template>
 
 <script setup>
-import Breadcumbs from "~/components/Breadcumbs.vue"; 
+import { useHistoryStore } from "~/store/historyStore";
+import { useBookmarkStore } from "~/store/bookmarkStore";
+const historyStore = useHistoryStore();
+const lasread = ref(null);
+
+import Breadcumbs from "~/components/Breadcumbs.vue";
 //get props slug
 const props = defineProps({
   slug: {
@@ -106,10 +124,27 @@ const props = defineProps({
   },
 });
 
-
-import { makeItjetPack } from "~/utils/jetpack";
 import { formatDate } from "~/utils/date";
 const { data: manga, error } = await useFetch(() => `/api/manga/${props.slug}`);
+if (manga.value) {
+  // console.log(manga.value.id);
+  lasread.value = historyStore.getLastReadHistory(manga.value.id)
+    ? historyStore.getLastReadHistory(manga.value.id).manga_slug
+    : null;
+}
+
+const bookmarkStore = useBookmarkStore();
+
+const isBookmarked = computed(() => bookmarkStore.isBookmarked(manga.value.id));
+
+const toggleBookmark = () => {
+  if (isBookmarked.value) {
+    bookmarkStore.removeBookmark(manga.value.id);
+  } else {
+    bookmarkStore.addBookmark(manga.value.id);
+  }
+};
+
 useJsonld(() => {
   if (manga.value) {
     return {
@@ -119,5 +154,5 @@ useJsonld(() => {
       url: `https://fakomik.id/manga/${manga.value.slug}`,
     };
   }
-})
+});
 </script>

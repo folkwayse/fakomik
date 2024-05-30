@@ -23,11 +23,12 @@
               <span class="mx-2">/</span>
             </li>
             <li class="flex items-center">
-              <a
-                href="/manga"
+              <NuxtLink
                 class="text-gray-600 hover:text-blue-500 transition-colors duration-300"
-                >Manga</a
+                :href="`/manga/${data.Chapter.manga.slug}`"
               >
+                {{ data.Chapter.manga.title }}
+              </NuxtLink>
               <span class="mx-2">/</span>
             </li>
             <li class="flex items-center">
@@ -63,11 +64,6 @@
 </template>
 
 <script setup>
-// implementasi watch history dan add views
-import { useHistoryStore } from "~/store/historyStore";
-
-const historyStore = useHistoryStore();
-
 const config = useRuntimeConfig();
 
 // Access baseURL universally
@@ -79,7 +75,7 @@ const { data, pending, error, refresh } = useAsyncData("chapter", async () => {
   const data = await $fetch(
     `${config.public.baseURL}chapters/gettitle/${slug}`
   );
-  historyStore.addHistory(slug, data.Chapter.name);
+
   return data;
 });
 
