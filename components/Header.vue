@@ -73,10 +73,12 @@ import { useRouter, useRoute } from 'vue-router'
 
 
 const items = ref([
-  { label: 'Home', link: '/' },
+  
   { label: 'Genres', link: '/genres' },
   { label: 'History', link: '/history' },
-  { label: 'Account', link: '/account' },
+  { label: 'Bookmark', link: '/bookmark' },
+  { label: 'Donasi', link: '/donasi' },
+  
 ])
 
 const isOpen = ref(false)

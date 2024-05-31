@@ -3,7 +3,9 @@
     <section class="lg:w-2/3 sm:w-full mx-auto py-8">
       <div class="mx-4">
         <div class="flex justify-between items-center mb-4">
-          <h2 class="text-2xl font-bold">Chapter Baru</h2>
+          <h2 class="text-2xl font-bold">
+            Manga Baru Ditambahkan
+          </h2>
         </div>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -33,14 +35,20 @@
         </div>
       </div>
       <div class="flex justify-center m-3 p-2">
-        <NuxtLink v-if="mangaData.prevPage" :to="`/manga/update/page/${mangaData.prevPage}`">
+        <NuxtLink
+          v-if="mangaData.prevPage"
+          :to="`/manga/new/page/${mangaData.prevPage}`"
+        >
           <button class="text-white bg-indigo-500 px-4 py-2 hover:underline">
-            < Prev
+            &lt; Prev
           </button>
         </NuxtLink>
-        <NuxtLink  v-if="mangaData.nextPage"  :to="`/manga/update/page/${mangaData.nextPage}`">
+        <NuxtLink
+          v-if="mangaData.nextPage"
+          :to="`/manga/new/page/${mangaData.nextPage}`"
+        >
           <button class="text-white bg-indigo-500 px-4 py-2 hover:underline">
-            Next >
+            Next &gt;
           </button>
         </NuxtLink>
       </div>
@@ -49,17 +57,13 @@
 </template>
 
 <script setup>
-
+import { formatDistanceToNow } from "date-fns";
 const props = defineProps({
   page: {
     type: Number,
     default: 1,
   },
 });
-
-
-import { formatDistanceToNow } from "date-fns";
-
 
 const mangas = ref([]);
 const formattedTime = (time) => {
@@ -68,7 +72,7 @@ const formattedTime = (time) => {
 // const { data: mangaData, error } = await useFetch("/api/manga/newmanga");
 const config = useRuntimeConfig();
 const { data: mangaData } = await useFetch(
-  `${config.public.baseURL}mangas/newchapter?page=${props.page}`
+  `${config.public.baseURL}mangas/newmanga?page=${parseInt(props.page)}`
 );
 if (mangaData.value) {
   mangas.value = mangaData.value.mangas;

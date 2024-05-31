@@ -2,6 +2,7 @@
   <div>
     <Notif />
     <MangaUpdate />
+    <MangaBaru />
   </div>
 </template>
 
@@ -11,4 +12,5 @@ definePageMeta({
 });
 import Notif from "~/components/Notif.vue";
 import MangaUpdate from "~/components/MangaUpdate.vue";
+import MangaBaru from "~/components/MangaBaru.vue";
 </script>

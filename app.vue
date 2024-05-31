@@ -8,6 +8,9 @@ import HeaderComponent from "~/components/Header.vue";
       <HeaderComponent/>
     </nav>
     <NuxtPage />
+    <a href="/" alt="" target="_blank" >
+<img  src="//sstatic1.histats.com/0.gif?4870396&101" alt="" border="0">
+    </a>
   </div>
 </template>
 <style>

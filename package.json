@@ -20,6 +20,7 @@
     "@nuxtjs/sitemap": "^5.1.5",
     "@pinia/nuxt": "^0.5.1",
     "@prisma/client": "^5.13.0",
+    "date-fns": "^3.6.0",
     "drizzle-orm": "^0.30.10",
     "nuxt": "^3.11.2",
     "nuxt-cloudflare-analytics": "^1.0.8",
