@@ -59,12 +59,12 @@ const props = defineProps({
 
 
 import { formatDistanceToNow } from "date-fns";
-
-
-const mangas = ref([]);
 const formattedTime = (time) => {
   return formatDistanceToNow(time, { addSuffix: true });
 };
+
+const mangas = ref([]);
+
 // const { data: mangaData, error } = await useFetch("/api/manga/newmanga");
 const config = useRuntimeConfig();
 const { data: mangaData } = await useFetch(

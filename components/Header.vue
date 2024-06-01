@@ -74,6 +74,7 @@ import { useRouter, useRoute } from 'vue-router'
 
 const items = ref([
   
+  { label: 'Manga', link: '/manga' },
   { label: 'Genres', link: '/genres' },
   { label: 'History', link: '/history' },
   { label: 'Bookmark', link: '/bookmark' },

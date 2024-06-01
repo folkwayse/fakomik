@@ -31,13 +31,7 @@
               </NuxtLink>
               <span class="mx-2">/</span>
             </li>
-            <li class="flex items-center">
-              <NuxtLink :href="`/manga/${data.Chapter.manga.slug}`">
-                <span class="text-gray-200">{{
-                  data.Chapter.manga.title
-                }}</span>
-              </NuxtLink>
-            </li>
+           
             <li class="flex items-center">
               <span class="text-gray-200">{{ data.Chapter.name }}</span>
             </li>
@@ -71,35 +65,33 @@ const homeUrl = config.public.homeUrl;
 
 const { params } = useRoute();
 const slug = params.slug;
-const { data, pending, error, refresh } = useAsyncData("chapter", async () => {
+const { data, pending, error, refresh } = await useAsyncData("chapter", async () => {
   const data = await $fetch(
     `${config.public.baseURL}chapters/gettitle/${slug}`
   );
-
+  useJsonld(() => ({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Manga",
+        item: homeUrl + "manga",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: data.value.Chapter.manga.title,
+        item: homeUrl + "manga/" + data.value.Chapter.manga.slug,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: data.value.Chapter.name,
+      },
+    ],
+  }));
   return data;
 });
-
-useJsonld(() => ({
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Manga",
-      item: homeUrl + "manga",
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
-      name: data.value.Chapter.manga.title,
-      item: homeUrl + "manga/" + data.value.Chapter.manga.slug,
-    },
-    {
-      "@type": "ListItem",
-      position: 3,
-      name: data.value.Chapter.name,
-    },
-  ],
-}));
 </script>

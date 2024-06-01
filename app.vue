@@ -1,15 +1,17 @@
 <script setup>
 import HeaderComponent from "~/components/Header.vue";
+import FooterComponent from "~/components/Footer.vue";
 </script>
 
 <template>
   <div class="bg-gray-800 text-white min-h-screen">
     <nav class="mb-4">
-      <HeaderComponent/>
+      <HeaderComponent />
     </nav>
     <NuxtPage />
-    <a href="/" alt="" target="_blank" >
-<img  src="//sstatic1.histats.com/0.gif?4870396&101" alt="" border="0">
+    <FooterComponent/>
+    <a href="/" alt="" target="_blank">
+      <img src="//sstatic1.histats.com/0.gif?4870396&101" alt="" border="0" />
     </a>
   </div>
 </template>

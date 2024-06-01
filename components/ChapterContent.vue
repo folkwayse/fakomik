@@ -1,16 +1,20 @@
 <template>
   <section>
     <div class="container w-full m-auto">
+
       <ChapterInfo
         :chapterName="chapter.Chapter.name"
         :slug="chapter.Chapter.slug"
         :mangaTitle="chapter.Chapter.manga.title"
       />
+      <div class="justify-center items-center flex flex-wrap hidden">
+        {{ chapter.Chapter.updatedAt }}
+      </div>
       <div
-        class="fixed top-24 right-2 bg-gray-700 text-white text-sm py-1 px-2 rounded z-50"
+        class="bg-gray-700 text-white text-sm py-1 px-2 rounded z-50"
         v-if="imageLoaded !== chapter.Chapter.content.length"
       >
-        {{ imageLoaded }} / {{ chapter.Chapter.content.length }}
+       Loading images :  {{ imageLoaded }} / {{ chapter.Chapter.content.length }}
       </div>
       <div
         v-for="(i, index) in chapter.Chapter.content"
@@ -141,8 +145,11 @@ const historyStore = useHistoryStore();
 
 if (chapter.value) {
   historyStore.addHistory(
+
     chapter.value.Chapter.manga.id,
-    chapter.value.Chapter.slug
+    chapter.value.Chapter.slug,
+    chapter.value.Chapter.manga.title,
+    chapter.value.Chapter.chapter_number
   );
   // console.log('history added')
 }

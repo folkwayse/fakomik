@@ -1,16 +1,120 @@
 <template>
-  <div>
-    <Notif />
-    <MangaUpdate />
-    <MangaBaru />
+  <div class="container mx-auto p-4 lg:w-2/3 w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <!-- Genre selection -->
+      <div>
+        <label>Genre:</label>
+        <VueMultiselect
+          v-model="selectedGenres"
+          tag-placeholder="Add this as new tag"
+          placeholder="Type to search or add tag"
+          label="name"
+          track-by="name"
+          :multiple="true"
+          :options="genres"
+        />
+      </div>
+
+      <!-- Type selection -->
+
+      <!-- Status selection -->
+      <div>
+        <label>Type:</label>
+        <VueMultiselect v-model="selectedType" :options="optionsType" />
+      </div>
+
+      <!-- Language selection -->
+      <div>
+        <label>Order:</label>
+        <VueMultiselect v-model="selectedSortyBY" :options="optionsSortyBY" />
+      </div>
+    </div>
+
+    <div class="justify-center m-2">
+      <button
+        @click="advSearch()"
+        class="bg-purple-600 text-white px-4 py-2 rounded mb-2 w-full"
+      >
+        Filter
+      </button>
+    </div>
+
+    <div class="py-2">
+
+      
+      <div v-if="mangas.length === 0" class="text-center text-gray-500">
+        No results found.
+      </div>
+      <div v-else>
+        <NuxtLink
+       
+       v-for="result in mangas"
+       :key="result.slug"
+       :to="`/manga/${result.slug}`"
+       class="flex items-center p-2 text-gray-300 hover:bg-gray-700 transition-colors duration-200"
+     >
+       <img :src="result.poster" alt="Poster" class=" w-28 rounded mr-4 object-cover"/>
+       <div>
+         <h3 class="text-sm font-semibold">{{ result.title }}</h3>
+         <p class="text-xs text-gray-400">{{ result.last_chapters }}</p>
+         <p class="text-xs text-yellow-400">Rating: {{ result.rating }}</p>
+         <p class="text-xs text-red-400">Type: {{ result.type }}</p>
+         <p class="text-xs text-green-400">Status: {{ result.status }}</p>
+         <p class="text-xs text-blue-400">
+           genres: <ul class="flex flex-wrap space-x-2 m-2">
+               <li v-for="genre in result.genre" :key="genre" class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-xs">{{ genre.name }}</li>
+           </ul>
+         </p>
+       </div>
+     </NuxtLink>
+  
+      </div>
+      </div>
   </div>
 </template>
 
 <script setup>
-definePageMeta({
-  title: "Fakomik Cloud Home - Update Terbaru Manga Manhwa Manhua",
-});
-import Notif from "~/components/Notif.vue";
-import MangaUpdate from "~/components/MangaUpdate.vue";
-import MangaBaru from "~/components/MangaBaru.vue";
+import VueMultiselect from "vue-multiselect";
+const config = useRuntimeConfig();
+const selected = ref(null);
+const options = ref(["list", "of", "options"]);
+const selectedGenres = ref([]);
+const selectedType = ref(null);
+const selectedSortyBY = ref(null);
+const optionsType = ref(["Manga", "Manhwa", "Manhua"]);
+const optionsSortyBY = ref(["update", "release", "rating", "popularity"]);
+const mangas = ref([]);
+
+const { data: genres } = await useFetch(`${config.public.baseURL}genres`);
+
+const advSearch = async () => {
+  if (selectedGenres.value.length < 1) {
+    alert("paling tidak harus memilih 1 genre");
+    return;
+  }
+
+  const jsonData = {
+    genres: selectedGenres.value,
+    type: selectedType.value,
+    sortyBy: selectedSortyBY.value,
+  };
+  const { data, pending, error, refresh } = await useAsyncData(
+    "mangas",
+    async () => {
+      const data = await $fetch(
+        `${config.public.baseURL}mangas/advancesearch`,
+        {
+          method: "POST",
+          body: jsonData,
+        }
+      );
+      mangas.value = data;
+      return data;
+    }
+  );
+};
+
+
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
