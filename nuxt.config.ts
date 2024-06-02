@@ -21,7 +21,9 @@ export default defineNuxtConfig({
   },
 
   ssr: true,
-
+  plugins: [
+    '~/utils/histats.js'
+  ],
   devtools: { enabled: true },
   modules: [
     "@nuxtjs/sitemap",
