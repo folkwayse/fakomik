@@ -4,7 +4,7 @@
       <div class="flex justify-between items-center">
         <div>
           <h1 class="text-xl font-bold">Fakomik</h1>
-          <p>&copy; {{ new Date().getFullYear() }} Fakomik. All rights reserved.</p>
+          <p>&copy; {{ currentYear }} Fakomik. All rights reserved.</p>
         </div>
         <div class="flex space-x-4">
           <a href="#" class="hover:text-indigo-400">Dmca</a>
@@ -20,9 +20,17 @@
 <script>
 export default {
   name: "Footer",
+  data() {
+    return {
+      currentYear: new Date().getFullYear()
+    };
+  }
 };
 </script>
 
 <style scoped>
-/* Add any additional styling here if needed */
+/* Ensure consistent spacing and layout */
+footer {
+  @apply min-h-[100px]; /* Example height, adjust as needed */
+}
 </style>

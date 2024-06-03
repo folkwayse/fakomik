@@ -40,11 +40,13 @@ export const useHistoryStore = defineStore("history", {
       }
     },
     getLastReadHistory(manga_id: string): HistoryItem | null {
-      const history = this.histories.find(
-        (history) => history.manga_id === manga_id
-      );
-      return history || null;
+      const index = this.histories.findIndex( (history) => history.manga_id === manga_id );
+    
+      const history = this.histories[index];
+    
+      return index === -1 ? null : history;
     },
+    
   },
   getters: {
     getHistoriesByTimestamp(): Record<string, HistoryItem[]> {

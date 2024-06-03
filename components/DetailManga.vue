@@ -21,7 +21,8 @@
               </button>
 
               <div class="flex justify-center items-center m-2">
-                <span class="m-2 text-xs">{{ manga.rating }} / 100</span>
+                
+                <Rating :rating="manga.rating" />
               </div>
               <NuxtLink v-if="lasread" :to="`/chapters/${lasread}`">
                 <button
@@ -112,7 +113,7 @@
 <script setup>
 import { useHistoryStore } from "~/store/historyStore";
 import { useBookmarkStore } from "~/store/bookmarkStore";
-const historyStore = useHistoryStore();
+import Rating from "~/components/Rating.vue";
 const lasread = ref(null);
 
 import Breadcumbs from "~/components/Breadcumbs.vue";
@@ -126,15 +127,14 @@ const props = defineProps({
 
 import { formatDate } from "~/utils/date";
 const { data: manga, error } = await useFetch(() => `/api/manga/${props.slug}`);
-if (manga.value) {
-  // console.log(manga.value.id);
-  lasread.value = historyStore.getLastReadHistory(manga.value.id)
-    ? historyStore.getLastReadHistory(manga.value.id).manga_slug
-    : null;
-}
+const historyStore = useHistoryStore();
+
+lasread.value = historyStore.getLastReadHistory(manga.value.id)?.chapter_slug || null
+
+
+
 
 const bookmarkStore = useBookmarkStore();
-
 const isBookmarked = computed(() => bookmarkStore.isBookmarked(manga.value.id));
 
 const toggleBookmark = () => {
