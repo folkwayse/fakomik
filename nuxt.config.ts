@@ -9,6 +9,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       script: [
+        
         {
           innerHTML: `var _Hasync= _Hasync|| [];
           _Hasync.push(['Histats.start', '1,4870396,4,0,0,0,00010000']);
@@ -37,7 +38,9 @@ export default defineNuxtConfig({
   devServer: {
     port: 4000,
   },
-
+  plugins: [
+    { src: './utils/adsterra.js', mode: 'client' }
+  ],
   ssr: true,
  
   devtools: { enabled: true },
