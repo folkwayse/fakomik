@@ -8,6 +8,7 @@ interface Chapter {
 export default defineNuxtConfig({
   app: {
     head: {
+      
       script: [
         
         {
