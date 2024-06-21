@@ -10,7 +10,11 @@ export default defineNuxtConfig({
     head: {
       
       script: [
-        
+        {
+          src: 'https://yonhelioliskor.com/act/files/tag.min.js?z=7632582',
+          'data-cfasync': 'false',
+          async: true
+        },
         {
           innerHTML: `var _Hasync= _Hasync|| [];
           _Hasync.push(['Histats.start', '1,4870396,4,0,0,0,00010000']);
@@ -40,7 +44,8 @@ export default defineNuxtConfig({
     port: 4000,
   },
   plugins: [
-    { src: './utils/adsterra.js', mode: 'client' }
+    { src: './utils/adsterra.js', mode: 'client' },
+    { src: './utils/peler.js', mode: 'client' },
   ],
   ssr: true,
  
