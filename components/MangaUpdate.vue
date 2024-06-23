@@ -20,9 +20,11 @@
           >
             <i class="fas fa-image text-gray-500"></i>
           </div>
-          <div class="text-white text-left text-s overflow-hidden overflow-ellipsis line-clamp-2">
-  {{ item.title }}
-</div>
+          <div
+            class="text-white text-left text-s overflow-hidden overflow-ellipsis line-clamp-2"
+          >
+            {{ item.title }}
+          </div>
           <div class="text-gray-400 text-left">
             Ch. {{ item.last_chapter_number }}
           </div>
@@ -30,23 +32,23 @@
       </div>
     </section>
     <div class="flex justify-center m-3 p-2">
-        <NuxtLink
-          v-if="mangaData.prevPage"
-          :to="`/manga/update/page/${mangaData.prevPage}`"
-        >
-          <button class="text-white bg-indigo-500 px-4 py-2 hover:underline">
-            < Prev
-          </button>
-        </NuxtLink>
-        <NuxtLink
-          v-if="mangaData.nextPage"
-          :to="`/manga/update/page/${mangaData.nextPage}`"
-        >
-          <button class="text-white bg-indigo-500 px-4 py-2 hover:underline">
-            Next >
-          </button>
-        </NuxtLink>
-      </div>
+      <NuxtLink
+        v-if="mangaData.prevPage"
+        :to="`/manga/update/page/${mangaData.prevPage}`"
+      >
+        <button class="text-white bg-indigo-500 px-4 py-2 hover:underline">
+          < Prev
+        </button>
+      </NuxtLink>
+      <NuxtLink
+        v-if="mangaData.nextPage"
+        :to="`/manga/update/page/${mangaData.nextPage}`"
+      >
+        <button class="text-white bg-indigo-500 px-4 py-2 hover:underline">
+          Next >
+        </button>
+      </NuxtLink>
+    </div>
   </div>
 </template>
 

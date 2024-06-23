@@ -1,39 +1,36 @@
 <template>
   <div>
     <section class="lg:w-2/3 sm:w-full mx-auto py-8">
-      <div class="mx-4">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-2xl font-bold">
-            Manga Baru Ditambahkan
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <NuxtLink v-for="i in mangas" :key="i"
-          :to="`/manga/${i.slug}`"
+      <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-4 p-4">
+        <NuxtLink
+          v-for="(item, index) in mangas"
+          :key="index"
+          class="bg-gray-800 p-2 rounded-lg text-center"
+          :to="`/manga/${item.slug}`"
+        >
+          <NuxtImg
+            v-if="item.poster"
+            :src="makeItjetPack(item.poster)"
+            :alt="item.title"
+            class="w-full h-48 object-cover rounded-lg mb-2"
+          />
+          <div
+            v-else
+            class="w-full bg-gray-700 rounded-lg mb-2 flex items-center justify-center"
           >
-            <div class="flex items-start gap-4 bg-gray-900 rounded-lg m-1 p-2">
-              <NuxtImg
-                :src="i.poster"
-                alt="Attack on Titan"
-                class="aspect-[9/16] rounded-lg object-cover h-36"
-              />
-              <div class="grid flex-1 gap-2">
-                <h3 class="text-lg font-medium">{{ i.title }}</h3>
-                <div class="grid gap-2">
-                  <div
-                    class="items-center text-sm text-gray-500 dark:text-gray-400"
-                  >
-                    <span> {{ i.last_chapters }} </span>
-                    <br />
-                    <span>[{{ formattedTime(i.updatedAt) }}]</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </NuxtLink>
-        </div>
+            <i class="fas fa-image text-gray-500"></i>
+          </div>
+          <div
+            class="text-white text-left text-s overflow-hidden overflow-ellipsis line-clamp-2"
+          >
+            {{ item.title }}
+          </div>
+          <div class="text-gray-400 text-left">
+            Ch. {{ item.last_chapter_number }}
+          </div>
+        </NuxtLink>
       </div>
+    </section>
       <div class="flex justify-center m-3 p-2">
         <NuxtLink
           v-if="mangaData.prevPage"
@@ -52,7 +49,7 @@
           </button>
         </NuxtLink>
       </div>
-    </section>
+   
   </div>
 </template>
 
