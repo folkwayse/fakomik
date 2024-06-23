@@ -26,7 +26,7 @@
             {{ item.title }}
           </div>
           <div class="text-gray-400 text-left">
-            Ch. {{ item.last_chapter_number }}
+            Chapter {{ item.last_chapter_number }}
           </div>
         </NuxtLink>
       </div>
