@@ -2,9 +2,9 @@
 import HeaderComponent from "~/components/Header.vue";
 import FooterComponent from "~/components/Footer.vue";
 
-useHead({
-  meta: [{ name: "monetag", content: "455f676e09ad0ed36c2857340e16c7f5" }],
-});
+// useHead({
+//   meta: [{ name: "monetag", content: "455f676e09ad0ed36c2857340e16c7f5" }],
+// });
 
 </script>
 
