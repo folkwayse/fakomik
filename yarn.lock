@@ -1088,6 +1088,11 @@
   resolved "https://registry.npmjs.org/@kwsites/promise-deferred/-/promise-deferred-1.1.1.tgz"
   integrity sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==
 
+"@kyvg/vue3-notification@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@kyvg/vue3-notification/-/vue3-notification-3.2.1.tgz#b7dc9f1855b43a24797acee92988dff89aefb45d"
+  integrity sha512-qn4bCBBCxW0Ya+RmHXu2SYBVwGXWsAGdlDKqCqyLryaZTbtFXi32iSSLnuKjSUVxFqQRToFc6g1zp1XLTyHrvw==
+
 "@lezer/common@^1.0.0", "@lezer/common@^1.1.0", "@lezer/common@^1.2.0":
   version "1.2.1"
   resolved "https://registry.npmjs.org/@lezer/common/-/common-1.2.1.tgz"
@@ -6969,6 +6974,15 @@ nuxt-site-config@2.2.12, nuxt-site-config@^2.2.11, nuxt-site-config@^2.2.12:
     sirv "^2.0.4"
     site-config-stack "2.2.12"
     ufo "^1.4.0"
+
+nuxt3-notifications@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/nuxt3-notifications/-/nuxt3-notifications-1.2.2.tgz#4ae0a30ac3aacfed27aa52acf3a2352223424b65"
+  integrity sha512-hJ2ONUjagfWPzPrk2YylG5W1U34w1wBDEJwQyYN2jGZAe3jX9Osi/KVC+K2cmSKA8KLZHDEfCiMxOwRPDcupSQ==
+  dependencies:
+    "@kyvg/vue3-notification" "^3.2.1"
+    defu "^6.1.4"
+    scule "^1.0.0"
 
 nuxt@^3.11.2:
   version "3.11.2"

@@ -2,24 +2,22 @@
 import HeaderComponent from "~/components/Header.vue";
 import FooterComponent from "~/components/Footer.vue";
 
-
 useHead({
-  meta: [
-    { name: 'monetag', content: '455f676e09ad0ed36c2857340e16c7f5' }
-  ]
-})
+  meta: [{ name: "monetag", content: "455f676e09ad0ed36c2857340e16c7f5" }],
+});
+
 </script>
 
 <template>
-   <NuxtLoadingIndicator />
-   <NuxtRouteAnnouncer />
+  <NuxtLoadingIndicator />
+  <!-- <NuxtRouteAnnouncer /> -->
+
   <div class="bg-gray-800 text-white min-h-screen">
     <nav class="mb-4">
       <HeaderComponent />
     </nav>
     <NuxtPage />
-    <FooterComponent/>
-   
+    <FooterComponent />
   </div>
 </template>
 <style>

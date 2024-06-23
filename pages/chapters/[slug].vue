@@ -3,11 +3,13 @@
    
     
     <PrevNextNavigation></PrevNextNavigation>
+    <Notif />
     <ChapterContent/>
     <PrevNextNavigation></PrevNextNavigation>
     <ChapterList />
     <CommentSection/>
     <MangaRekomendasi />
+    
    
   </main>
 </template>
@@ -19,6 +21,7 @@ import ChapterContent from "~/components/ChapterContent.vue";
 import PrevNextNavigation from "~/components/PrevNextNavigation.vue";
 import MangaRekomendasi from "~/components/MangaRekomendasi.vue";
 import CommentSection from "~/components/CommentSection.vue";
+import Notif from "~/components/Notif.vue";
 
 
 
