@@ -15,13 +15,13 @@
 
 <script>
 
-const { params } = useRoute();
-const slug = params.slug;
-// const config = useRuntimeConfig();
-// const { data: chapter, error } = await useFetch(
-//   () => `${config.public.baseURL}chapters/getchapter/${slug}`
-// );
+// const { params } = useRoute();
+// const slug = params.slug;
+// // const config = useRuntimeConfig();
+// // const { data: chapter, error } = await useFetch(
+// //   () => `${config.public.baseURL}chapters/getchapter/${slug}`
+// // );
 
-console.log(slug);
+// console.log(slug);
 
 </script>

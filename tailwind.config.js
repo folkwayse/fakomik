@@ -5,7 +5,10 @@ export default {
     extend: {
       colors: {
         primary: colors.indigo
-      }
+      },
+      fontFamily: {
+        'sans': ['Rubik', 'sans-serif'],
+      },
     }
   }
 }

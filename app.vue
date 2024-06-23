@@ -12,7 +12,7 @@ useHead({
   <NuxtLoadingIndicator />
   <!-- <NuxtRouteAnnouncer /> -->
 
-  <div class="bg-gray-800 text-white min-h-screen">
+  <div class="bg-gray-800 text-white min-h-screen font-sans">
     <nav class="mb-4">
       <HeaderComponent />
     </nav>

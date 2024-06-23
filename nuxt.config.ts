@@ -35,6 +35,10 @@ export default defineNuxtConfig({
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
       link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap',
+        },
         { rel: 'canonical', href: 'https://www.fakomik.cloud' } // Atur URL yang benar di sini
       ]
     },
