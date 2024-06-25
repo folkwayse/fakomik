@@ -20,9 +20,7 @@
         :slug="chapter.Chapter.slug"
         :mangaTitle="chapter.Chapter.manga.title"
       />
-      <div class="justify-center items-center flex flex-wrap hidden">
-        {{ chapter.Chapter.updatedAt }}
-      </div>
+     
       <PrevNextNavigation />
       <div
         class="bg-gray-700 text-white text-sm py-1 px-2 rounded z-50"

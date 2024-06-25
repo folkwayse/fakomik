@@ -25,15 +25,17 @@
               {{ item.title }}
             </div>
           </NuxtLink>
-          <div
-            class="text-gray-400 text-left"
-            v-for="(item, index) in item.chapter"
-          >
-            <NuxtLink :to="`/chapters/${item.slug}`">
-              Ch. {{ item.chapter_number }}
-            </NuxtLink>
-          </div>
+           <div
+          class="text-gray-400 text-left"
+          v-for="(item, index) in item.chapter"
+        >
+          <NuxtLink :to="`/chapters/${item.slug}`">
+            Ch. {{ item.chapter_number }} 
+          </NuxtLink>
         </div>
+        </div>
+
+       
       </div>
     </section>
     <div class="flex justify-center m-3 p-2">
