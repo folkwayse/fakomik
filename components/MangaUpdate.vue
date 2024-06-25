@@ -26,7 +26,7 @@
             {{ item.title }}
           </div>
           <div class="text-gray-400 text-left">
-            Ch. {{ item.last_chapter_number }}
+            Ch. {{ item?.last_chapter_number ?? item.last_chapters }},   {{ formatDistanceToNow(new Date(item.updatedAt)) }} ago
           </div>
         </NuxtLink>
       </div>
@@ -63,9 +63,6 @@ const props = defineProps({
 import { formatDistanceToNow } from "date-fns";
 import { makeItjetPack } from "~/utils/jetpack";
 
-const formattedTime = (time) => {
-  return formatDistanceToNow(time, { addSuffix: true });
-};
 
 const mangas = ref([]);
 

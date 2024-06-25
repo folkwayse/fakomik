@@ -26,7 +26,7 @@
             {{ item.title }}
           </div>
           <div class="text-gray-400 text-left">
-            chap {{ item.last_chapter_number }}
+            chap {{ item.last_chapter_number }} , 
             {{ formatDistanceToNow(new Date(item.updatedAt)) }} ago
           </div>
         </NuxtLink>

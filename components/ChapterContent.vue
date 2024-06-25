@@ -1,7 +1,20 @@
 <template>
   <section>
-    <div class="container w-full m-auto">
 
+    
+    <div class="fixed bottom-5 right-5 z-50">
+      <button @click="scrollToTop">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="black">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </button>
+    </div>
+
+
+
+
+
+    <div class="container w-full m-auto">
       <ChapterInfo
         :chapterName="chapter.Chapter.name"
         :slug="chapter.Chapter.slug"
@@ -10,12 +23,15 @@
       <div class="justify-center items-center flex flex-wrap hidden">
         {{ chapter.Chapter.updatedAt }}
       </div>
+      <PrevNextNavigation />
       <div
         class="bg-gray-700 text-white text-sm py-1 px-2 rounded z-50"
         v-if="imageLoaded !== chapter.Chapter.content.length"
       >
-       Loading images :  {{ imageLoaded }} / {{ chapter.Chapter.content.length }}
+        Loading images : {{ imageLoaded }} /
+        {{ chapter.Chapter.content.length }}
       </div>
+
       <div
         v-for="(i, index) in chapter.Chapter.content"
         :key="index"
@@ -40,12 +56,18 @@
         </button>
       </div>
     </div>
+
+    <PrevNextNavigation />
+
+    <ChapterList :chapterslug="slug"  />
   </section>
-  
 </template>
 
 <script setup>
 import ChapterInfo from "./ChapterInfo.vue";
+import ChapterList from "~/components/ChapterList.vue";
+import PrevNextNavigation from "~/components/PrevNextNavigation.vue";
+
 const { params } = useRoute();
 const slug = params.slug;
 const config = useRuntimeConfig();
@@ -62,6 +84,12 @@ const LoadedImages = () => {
   imageLoaded.value += 1;
 };
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
 const errorImages = (index) => {
   if (!errorIndexes.value.includes(index)) {
     errorIndexes.value.push(index);
@@ -146,7 +174,6 @@ const historyStore = useHistoryStore();
 
 if (chapter.value) {
   historyStore.addHistory(
-
     chapter.value.Chapter.manga.id,
     chapter.value.Chapter.slug,
     chapter.value.Chapter.manga.title,

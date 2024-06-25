@@ -3,13 +3,15 @@
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center">
         <div>
+         <NuxtLink to="/">
           <h1 class="text-xl font-bold">Fakomik</h1>
+         </NuxtLink>
           <p>&copy; {{ currentYear }} Fakomik. All rights reserved.</p>
         </div>
         <div class="flex space-x-4">
           <a href="#" class="hover:text-indigo-400">Dmca</a>
           <a href="#" class="hover:text-indigo-400">Privacy Policy</a>
-          <a href="#" class="hover:text-indigo-400">Ads</a>
+          <NuxtLink to="/iklan" class="hover:text-indigo-400">Ads</NuxtLink>
           <a href="#" class="hover:text-indigo-400">Contact Us</a>
         </div>
       </div>
