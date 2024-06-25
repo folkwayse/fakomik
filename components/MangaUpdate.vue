@@ -2,50 +2,55 @@
   <div>
     <section class="lg:w-2/3 sm:w-full mx-auto py-8">
       <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-4 p-4">
-        <NuxtLink
-          v-for="(item, index) in mangas"
-          :key="index"
-          class="bg-gray-800 p-2 rounded-lg text-center"
-          :to="`/manga/${item.slug}`"
-        >
-          <NuxtImg
-            v-if="item.poster"
-            :src="makeItjetPack(item.poster)"
-            :alt="item.title"
-            class="w-full h-48 object-cover rounded-lg mb-2"
-          />
-          <div
-            v-else
-            class="w-full bg-gray-700 rounded-lg mb-2 flex items-center justify-center"
+        <div v-for="(item, index) in mangas" :key="index">
+          <NuxtLink
+            class="bg-gray-800 p-2 rounded-lg text-center"
+            :to="`/manga/${item.slug}`"
           >
-            <i class="fas fa-image text-gray-500"></i>
-          </div>
+            <NuxtImg
+              v-if="item.poster"
+              :src="makeItjetPack(item.poster)"
+              :alt="item.title"
+              class="w-full h-48 object-cover rounded-lg mb-2"
+            />
+            <div
+              v-else
+              class="w-full bg-gray-700 rounded-lg mb-2 flex items-center justify-center"
+            >
+              <i class="fas fa-image text-gray-500"></i>
+            </div>
+            <div
+              class="text-white text-left text-s overflow-hidden overflow-ellipsis line-clamp-2"
+            >
+              {{ item.title }}
+            </div>
+          </NuxtLink>
           <div
-            class="text-white text-left text-s overflow-hidden overflow-ellipsis line-clamp-2"
+            class="text-gray-400 text-left"
+            v-for="(item, index) in item.chapter"
           >
-            {{ item.title }}
+            <NuxtLink :to="`/chapters/${item.slug}`">
+              Ch. {{ item.chapter_number }}
+            </NuxtLink>
           </div>
-          <div class="text-gray-400 text-left">
-            Ch. {{ item?.last_chapter_number ?? item.last_chapters }},   {{ formatDistanceToNow(new Date(item.updatedAt)) }} ago
-          </div>
-        </NuxtLink>
+        </div>
       </div>
     </section>
     <div class="flex justify-center m-3 p-2">
       <NuxtLink
         v-if="mangaData.prevPage"
-        :to="`/manga/update/page/${mangaData.prevPage}`"
+        :to="`/manga/new/page/${mangaData.prevPage}`"
       >
         <button class="text-white bg-indigo-500 px-4 py-2 hover:underline">
-          < Prev
+          &lt; Prev
         </button>
       </NuxtLink>
       <NuxtLink
         v-if="mangaData.nextPage"
-        :to="`/manga/update/page/${mangaData.nextPage}`"
+        :to="`/manga/new/page/${mangaData.nextPage}`"
       >
         <button class="text-white bg-indigo-500 px-4 py-2 hover:underline">
-          Next >
+          Next &gt;
         </button>
       </NuxtLink>
     </div>
