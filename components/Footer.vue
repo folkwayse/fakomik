@@ -3,10 +3,10 @@
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center">
         <div>
-         <NuxtLink to="/">
-          <h1 class="text-xl font-bold">Fakomik</h1>
-         </NuxtLink>
-          <p>&copy; {{ currentYear }} Fakomik. All rights reserved.</p>
+          <NuxtLink to="/">
+            <h1 class="text-xl font-bold">{{ config.public.siteName }}</h1>
+          </NuxtLink>
+          <p>&copy; {{ currentYear }} {{ config.public.siteName }}. All rights reserved.</p>
         </div>
         <div class="flex space-x-4">
           <a href="#" class="hover:text-indigo-400">Dmca</a>
@@ -19,15 +19,11 @@
   </footer>
 </template>
 
-<script>
-export default {
-  name: "Footer",
-  data() {
-    return {
-      currentYear: new Date().getFullYear()
-    };
-  }
-};
+<script setup>
+
+const config = useRuntimeConfig()
+
+const currentYear = new Date().getFullYear()
 </script>
 
 <style scoped>

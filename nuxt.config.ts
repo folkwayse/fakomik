@@ -7,8 +7,8 @@ interface Chapter {
 
 export default defineNuxtConfig({
   app: {
+    
     head: {
-      
       script: [
         // {
         //   src: 'https://yonhelioliskor.com/act/files/tag.min.js?z=7632582',
@@ -25,34 +25,37 @@ export default defineNuxtConfig({
           hs.src = ('//s10.histats.com/js15_as.js');
           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
           })();`,
-          type: 'text/javascript'
-        }
+          type: "text/javascript",
+        },
       ],
-      __dangerouslyDisableSanitizers: ['script'],
+      __dangerouslyDisableSanitizers: ["script"],
       noscript: [
-        { innerHTML: `<a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4870396&101" alt="" border="0"></a>`, body: true }
+        {
+          innerHTML: `<a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4870396&101" alt="" border="0"></a>`,
+          body: true,
+        },
       ],
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
       link: [
         {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap',
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap",
         },
-        { rel: 'canonical', href: 'https://www.fakomik.cloud' } // Atur URL yang benar di sini
-      ]
+        { rel: "canonical", href: "https://www.fakomik.cloud" }, // Atur URL yang benar di sini
+      ],
     },
     pageTransition: { name: "page", mode: "out-in" },
   },
   devServer: {
-    port: 4000,
+    port: Number(process?.env?.PORT) || 5000,
   },
   // plugins: [
   //   { src: './utils/adsterra.js', mode: 'client' },
   //   { src: './utils/peler.js', mode: 'client' },
   // ],
   ssr: true,
- 
+
   devtools: { enabled: true },
   modules: [
     "@nuxtjs/sitemap",
@@ -63,16 +66,21 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@pinia/nuxt", // needed
     "@pinia-plugin-persistedstate/nuxt",
-    'nuxt-jsonld',
-    '@nuxt/image',
-    'nuxt-cloudflare-analytics',
-    
-    
+    "nuxt-jsonld",
+    "@nuxt/image",
+    "nuxt-cloudflare-analytics",
   ],
+  runtimeConfig: {
+    public: {
+      baseURL: process.env.API_URL,
+      homeUrl: process.env.HOME_URL,
+      siteName: process.env.SITE_NAME,
 
+    },
+  },
   cloudflareAnalytics: {
     // See below for more options
-    token: 'e269b38640754256852aa52657164770', // Example 1a2b3v4a5er6ac7r8afd
+    token: "e269b38640754256852aa52657164770", // Example 1a2b3v4a5er6ac7r8afd
   },
   piniaPersistedstate: {
     cookieOptions: {
@@ -80,16 +88,16 @@ export default defineNuxtConfig({
     },
     storage: "localStorage",
   },
-  image: {
-
-  },
+  image: {},
   robots: {
-    disallow : ["/api/*",'/upload','_nuxt/','sender','session'],
+    disallow: ["/api/*", "/upload", "_nuxt/", "sender", "session"],
   },
   site: {
-    url: "https://fakomik.cloud",
-    name: "Fakomik Cloud",
-    description: "Tempat Baca Komik Manga Manhua Manhwa Bahasa Indonesia",
+    url: process.env.HOME_URL || "https://www.fakomik.cloud",
+    name:  process.env.SITE_NAME || "Fakomik",
+    description: process.env.SITE_DESCRIPTION || "Fakomik",
+    keywords: process.env.SITE_KEYWORDS || "Fakomik",
+    
     defaultLocale: "id", // not needed if you have @nuxtjs/i18n installed
   },
   sitemap: {
@@ -125,7 +133,6 @@ export default defineNuxtConfig({
       // fetch from an unauthenticated endpoint
       process.env.API_URL + "sitemaps/chapters",
       // fetch from an authenticated endpoint
-      
     ],
 
     // Set sitemaps to true to generate the sitemap
@@ -133,11 +140,5 @@ export default defineNuxtConfig({
   },
   disqus: {
     shortname: "fakomik",
-  },
-  runtimeConfig: {
-    public: {
-      baseURL: process.env.API_URL || "https://api.example.com/",
-      homeUrl: process.env.HOME_URL ,
-    },
   },
 });

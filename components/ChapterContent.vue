@@ -1,18 +1,23 @@
 <template>
   <section>
-
-    
     <div class="fixed bottom-5 right-5 z-50">
       <button @click="scrollToTop">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="black">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="black"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
         </svg>
       </button>
     </div>
-
-
-
-
 
     <div class="container w-full m-auto">
       <ChapterInfo
@@ -20,7 +25,7 @@
         :slug="chapter.Chapter.slug"
         :mangaTitle="chapter.Chapter.manga.title"
       />
-     
+
       <PrevNextNavigation />
       <div
         class="bg-gray-700 text-white text-sm py-1 px-2 rounded z-50"
@@ -57,7 +62,7 @@
 
     <PrevNextNavigation />
 
-    <ChapterList :chapterslug="slug"  />
+    <ChapterList :chapterslug="slug" />
   </section>
 </template>
 
@@ -87,7 +92,7 @@ const scrollToTop = () => {
     top: 0,
     behavior: "smooth",
   });
-}
+};
 const errorImages = (index) => {
   if (!errorIndexes.value.includes(index)) {
     errorIndexes.value.push(index);
@@ -144,18 +149,18 @@ useJsonld(() => {
       },
       author: {
         "@type": "Person",
-        name: "Fakomik",
-        url: "https://Fakomik.cloud/author/Fakomik",
+        name: config.public.siteName,
+        url: config.public.homeUrl,
       },
       publisher: {
         "@type": "Organization",
-        name: "Fakomik",
+        name: config.public.siteName,
         logo: {
           "@type": "ImageObject",
           url: "https://i.imgur.com/iw7S99a.png",
           width: 600,
         },
-        url: "https://Fakomik.cloud",
+        url: config.public.HOME_URL,
       },
       articleBody:
         chapter.value.Chapter.name +

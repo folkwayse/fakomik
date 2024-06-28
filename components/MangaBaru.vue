@@ -74,6 +74,7 @@ const formattedTime = (time) => {
 };
 // const { data: mangaData, error } = await useFetch("/api/manga/newmanga");
 const config = useRuntimeConfig();
+console.log(config.public.baseURL);
 const { data: mangaData } = await useFetch(
   `${config.public.baseURL}mangas/newmanga?page=${parseInt(props.page)}`
 );

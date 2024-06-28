@@ -4,7 +4,7 @@
       <div class="flex justify-between h-16">
         <!-- Left part: Logo -->
         <div class="flex-shrink-0 flex items-center">
-          <NuxtLink to="/" class="text-xl font-bold">Fakomik</NuxtLink>
+          <NuxtLink to="/" class="text-xl font-bold">{{config.public.siteName}}</NuxtLink>
         </div>
 
         <!-- Middle part: Search bar -->
@@ -68,6 +68,7 @@
 </template>
 
 <script setup>
+const config = useRuntimeConfig();
 import { ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 

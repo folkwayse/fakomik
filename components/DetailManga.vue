@@ -144,6 +144,7 @@ const toggleBookmark = () => {
     bookmarkStore.addBookmark(manga.value.id);
   }
 };
+const config = useRuntimeConfig();
 
 useJsonld(() => {
   if (manga.value) {
@@ -151,7 +152,7 @@ useJsonld(() => {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: manga.value.title,
-      url: `https://fakomik.id/manga/${manga.value.slug}`,
+      url: config.public.url + `manga/${manga.value.slug}`,
     };
   }
 });
