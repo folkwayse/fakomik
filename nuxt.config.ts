@@ -7,7 +7,6 @@ interface Chapter {
 
 export default defineNuxtConfig({
   app: {
-    
     head: {
       script: [
         // {
@@ -75,7 +74,6 @@ export default defineNuxtConfig({
       baseURL: process.env.API_URL,
       homeUrl: process.env.HOME_URL,
       siteName: process.env.SITE_NAME,
-
     },
   },
   cloudflareAnalytics: {
@@ -94,10 +92,10 @@ export default defineNuxtConfig({
   },
   site: {
     url: process.env.HOME_URL || "https://www.fakomik.cloud",
-    name:  process.env.SITE_NAME || "Fakomik",
+    name: process.env.SITE_NAME || "Fakomik",
     description: process.env.SITE_DESCRIPTION || "Fakomik",
     keywords: process.env.SITE_KEYWORDS || "Fakomik",
-    
+
     defaultLocale: "id", // not needed if you have @nuxtjs/i18n installed
   },
   sitemap: {
@@ -131,7 +129,10 @@ export default defineNuxtConfig({
 
     sources: [
       // fetch from an unauthenticated endpoint
-      process.env.API_URL + "sitemaps/chapters",
+      // process.env.API_URL + "sitemaps/chapters",
+
+      process.env.API_URL + "sitemaps/chapters?Host=" + process.env.HOME_URL,
+
       // fetch from an authenticated endpoint
     ],
 
