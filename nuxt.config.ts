@@ -41,7 +41,7 @@ export default defineNuxtConfig({
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap",
         },
-        { rel: "canonical", href: "https://www.fakomik.cloud" }, // Atur URL yang benar di sini
+        { rel: "canonical", href: "https://www."+process.env.SITE_NAME }, // Atur URL yang benar di sini
       ],
     },
     pageTransition: { name: "page", mode: "out-in" },
