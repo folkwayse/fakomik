@@ -37,7 +37,11 @@
           </SheetTrigger>
           <SheetContent side="right">
             <SheetHeader>
-              <SheetTitle>Menu</SheetTitle>
+              <NuxtLink to="/">
+                <SheetTitle>
+                  {{ config.public.siteName }}
+                </SheetTitle>
+              </NuxtLink>
             </SheetHeader>
             <div class="grid gap-4 py-4">
               <NuxtLink v-for="item in items" :key="item.link" :to="item.link" @click="closeMenu"
