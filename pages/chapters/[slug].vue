@@ -1,14 +1,14 @@
 <template>
   <main>
-   
-    
- 
-    <Notif />
-    <ChapterContent/>
-    <CommentSection/>
-    <MangaRekomendasi />
-    
-   
+
+
+
+    <!-- <Notif /> -->
+    <ChapterContent />
+    <CommentSection />
+    <!--  <MangaRekomendasi /> -->
+
+
   </main>
 </template>
 <script setup>

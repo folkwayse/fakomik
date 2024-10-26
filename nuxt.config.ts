@@ -41,7 +41,7 @@ export default defineNuxtConfig({
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap",
         },
-        { rel: "canonical", href: "https://www."+process.env.SITE_NAME }, // Atur URL yang benar di sini
+        { rel: "canonical", href: "https://www." + process.env.SITE_NAME }, // Atur URL yang benar di sini
       ],
     },
     pageTransition: { name: "page", mode: "out-in" },
@@ -62,13 +62,27 @@ export default defineNuxtConfig({
     "nuxt-disqus",
     "@pinia/nuxt",
     "@nuxtjs/seo",
+    // needed
     "@nuxtjs/tailwindcss",
-    "@pinia/nuxt", // needed
+    "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
     "nuxt-jsonld",
     "@nuxt/image",
     "nuxt-cloudflare-analytics",
+    "shadcn-nuxt",
+    "@nuxt/icon"
   ],
+  shadcn: {
+    /**
+     * Prefix for all the imported component
+     */
+    prefix: "",
+    /**
+     * Directory that the component lives in.
+     * @default "./components/ui"
+     */
+    componentDir: "./components/ui",
+  },
   runtimeConfig: {
     public: {
       baseURL: process.env.API_URL,

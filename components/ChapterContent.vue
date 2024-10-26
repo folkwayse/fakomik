@@ -1,60 +1,31 @@
 <template>
   <section>
+
+
+
     <div class="fixed bottom-5 right-5 z-50">
-      <button @click="scrollToTop">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="black"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M5 10l7-7m0 0l7 7m-7-7v18"
-          />
-        </svg>
-      </button>
+      <Button @click="scrollToTop">
+        <Icon name="mdi:chevron-up" class="h-6 w-6" />
+      </Button>
     </div>
 
     <div class="container w-full m-auto">
-      <ChapterInfo
-        :chapterName="chapter.Chapter.name"
-        :slug="chapter.Chapter.slug"
-        :mangaTitle="chapter.Chapter.manga.title"
-      />
-
+      <ChapterInfo :chapterName="chapter.Chapter.name" :slug="chapter.Chapter.slug"
+        :mangaTitle="chapter.Chapter.manga.title" />
+      <ChapterList :chapterslug="slug" />
       <PrevNextNavigation />
-      <div
-        class="bg-gray-700 text-white text-sm py-1 px-2 rounded z-50"
-        v-if="imageLoaded !== chapter.Chapter.content.length"
-      >
-        Loading images : {{ imageLoaded }} /
-        {{ chapter.Chapter.content.length }}
-      </div>
+      <!-- <div
+        class="bg-gray-700 text-white text-sm py-1 px-2 rounded z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        v-if="imageLoaded !== chapter.Chapter.content.length">
+        Loading images : {{ (imageLoaded / chapter.Chapter.content.length) * 100 | numberFormat }}%
+      </div> -->
 
-      <div
-        v-for="(i, index) in chapter.Chapter.content"
-        :key="index"
-        class="relative"
-      >
-        <NuxtImg
-          @contextmenu.prevent
-          class="w-full p-0 m-0 object-fill"
-          :src="getImageSrc(i, index)"
-          :alt="`${chapter.Chapter.name} segment ${index + 1}`"
-          @load="LoadedImages"
-          loading="lazy"
-          @error="errorImages(index)"
-          @click="setCurrentSegment(index)"
-        />
-        <button
-          v-if="errorIndexes.includes(index)"
-          @click="reloadImage(index)"
-          class="absolute top-0 right-0 bg-red-500 text-white p-2"
-        >
+      <div v-for="(i, index) in chapter.Chapter.content" :key="index" class="relative">
+        <NuxtImg @contextmenu.prevent class="w-full p-0 m-0 object-fill" :src="getImageSrc(i, index)"
+          :alt="`${chapter.Chapter.name} segment ${index + 1}`" @load="LoadedImages" loading="lazy"
+          @error="errorImages(index)" @click="setCurrentSegment(index)" />
+        <button v-if="errorIndexes.includes(index)" @click="reloadImage(index)"
+          class="absolute top-0 right-0 bg-red-500 text-white p-2">
           Reload
         </button>
       </div>

@@ -6,28 +6,20 @@
         <div class="flex flex-col md:flex-row">
           <div class="md:w-1/3 mb-4 md:mb-0">
             <figure>
-              <img
-                class="w-full h-auto m-auto object-cover rounded-lg"
-                alt="The Demon Prince goes to the Academy"
-                :src="manga.poster"
-              />
+              <img class="w-full h-auto m-auto object-cover rounded-lg" alt="The Demon Prince goes to the Academy"
+                :src="manga.poster" />
             </figure>
             <div class="mt-4 text-center">
-              <button
-                class="bg-purple-600 text-white px-4 py-2 rounded mb-2 w-full"
-                @click="toggleBookmark"
-              >
+              <button class="bg-purple-600 text-white px-4 py-2 rounded mb-2 w-full" @click="toggleBookmark">
                 {{ isBookmarked ? "Remove Bookmark" : "Bookmark" }}
               </button>
 
               <div class="flex justify-center items-center m-2">
-                
+
                 <Rating :rating="manga.rating" />
               </div>
               <NuxtLink v-if="lasread" :to="`/chapters/${lasread}`">
-                <button
-                  class="bg-purple-600 text-white px-4 py-2 rounded mb-2 w-full"
-                >
+                <button class="bg-purple-600 text-white px-4 py-2 rounded mb-2 w-full">
                   Lanjut Baca
                 </button>
               </NuxtLink>
@@ -42,22 +34,17 @@
               {{ manga.description }}
             </p>
             <div class="justify-center items-center flex flex-wrap mb-4">
-              <NuxtLink
-                :to="`/chapters/${
-                  manga.chapter[manga.chapter.length - 1].slug
-                }`"
-              >
+              <NuxtLink v-if="manga.chapter.length > 0"
+                :to="`/chapters/${manga.chapter[manga.chapter.length - 1]?.slug || '#'}`">
                 <span class="bg-gray-700 text-white px-4 py-2 rounded m-1">
                   Chapter
                   {{
                     manga.chapter[manga.chapter.length - 1].chapter_number
-                  }}</span
-                >
+                  }}</span>
               </NuxtLink>
-              <NuxtLink :to="`/chapters/${manga.chapter[0].slug}`">
-                <span class="bg-gray-700 text-white px-4 py-2 rounded m-1"
-                  >Chapter {{ manga.chapter[0].chapter_number }}</span
-                >
+              <NuxtLink v-if="manga.chapter.length > 0" :to="`/chapters/${manga.chapter[0].slug}`">
+                <span class="bg-gray-700 text-white px-4 py-2 rounded m-1">Chapter {{ manga.chapter[0]?.chapter_number
+                  || "#" }}</span>
               </NuxtLink>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
@@ -80,11 +67,7 @@
             </div>
             <div class="mt-4">
               <div class="flex flex-wrap gap-2">
-                <NuxtLink
-                  v-for="genre in manga.genre"
-                  :key="genre.slug"
-                  :to="`/genres/${genre.slug}`"
-                >
+                <NuxtLink v-for="genre in manga.genre" :key="genre.slug" :to="`/genres/${genre.slug}`">
                   <span class="bg-gray-700 text-white px-4 py-1 rounded">{{
                     genre.name
                   }}</span>
@@ -98,11 +81,7 @@
     <section class="container mx-auto p-4 lg:w-2/3">
       Daftar Chapters :
       <ul class="list-disc max-h-96 overflow-auto">
-        <NuxtLink
-          v-for="i in manga.chapter"
-          :key="i.slug"
-          :to="`/chapters/${i.slug}`"
-        >
+        <NuxtLink v-if="manga.chapter.length > 0" v-for="i in manga.chapter" :key="i.slug" :to="`/chapters/${i.slug}`">
           <li class="text-gray-200 p-2">Chapter {{ i.chapter_number }}</li>
         </NuxtLink>
       </ul>
@@ -126,6 +105,8 @@ const props = defineProps({
 });
 
 import { formatDate } from "~/utils/date";
+
+console.log(props.slug);
 const { data: manga, error } = await useFetch(() => `/api/manga/${props.slug}`);
 const historyStore = useHistoryStore();
 
@@ -152,7 +133,7 @@ useJsonld(() => {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: manga.value.title,
-      url: config.public.url + `manga/${manga.value.slug}`,
+      url: config.public.url + `manga/${manga.value.slug ?? ''}`,
     };
   }
 });
