@@ -35,6 +35,7 @@ jobs:
           cd ./fakomik
           git fetch origin
           git reset --hard origin/main
+          npm -g install bun
           bun install
           bun build
           pm2 restart fakomik
