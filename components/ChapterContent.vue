@@ -1,7 +1,8 @@
 <template>
   <section>
 
-    <div v-if="isSwiping === true && direction === 'left'" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50 bg-black">
+    <div v-if="isSwiping === true && direction === 'left'"
+      class="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50 bg-black">
 
       <div>
         <ChevronRight class="h-6 w-6 transition-transform duration-200 ease-in-out animate-swipe" />
@@ -240,6 +241,11 @@ if (chapter.value) {
   );
 }
 
-
+onMounted(() => {
+  window.scrollTo({
+    top: 600,
+    behavior: 'smooth',
+  });
+});
 
 </script>
