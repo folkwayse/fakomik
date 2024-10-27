@@ -1,7 +1,7 @@
 <template>
   <section>
 
-    <div v-if="isSwiping === true " class="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50 bg-black">
+    <div v-if="isSwiping === true && direction === 'left'" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50 bg-black">
 
       <div>
         <ChevronRight class="h-6 w-6 transition-transform duration-200 ease-in-out animate-swipe" />
@@ -89,6 +89,7 @@ const target = ref(null);
 const router = useRouter();
 const { isSwiping, direction, distanceX } = useSwipe(target, {
   threshold: 150,
+
   onSwipeEnd(e) {
     if (direction.value === 'left') {
       console.log('swipe left');
@@ -238,4 +239,7 @@ if (chapter.value) {
     chapter.value.Chapter.chapter_number
   );
 }
+
+
+
 </script>
