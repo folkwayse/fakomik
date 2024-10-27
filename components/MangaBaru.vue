@@ -76,7 +76,7 @@ const formattedTime = (time) => {
 const config = useRuntimeConfig();
 console.log(config.public.baseURL);
 const { data: mangaData } = await useFetch(
-  `${config.public.baseURL}mangas/newmanga?page=${parseInt(props.page)}`
+  `${config.public.baseURL}mangas/newmanga?page=${Number(props.page)}`
 );
 if (mangaData.value) {
   mangas.value = mangaData.value.mangas;

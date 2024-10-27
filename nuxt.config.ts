@@ -70,7 +70,8 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-cloudflare-analytics",
     "shadcn-nuxt",
-    "@nuxt/icon"
+    "@nuxt/icon",
+    '@vueuse/nuxt',
   ],
   shadcn: {
     /**
