@@ -45,10 +45,15 @@
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core';
 import { ref } from 'vue'
-
+interface SearchResult {
+    slug: string;
+    poster: string;
+    title: string;
+    type: string;
+}
 const config = useRuntimeConfig()
 const searchQuery = ref('')
-const searchResults = ref<any>([])
+const searchResults = ref<SearchResult[]>([])
 const dialogOpen = ref(false)
 import { useToast } from '@/components/ui/toast/use-toast'
 
@@ -58,14 +63,14 @@ const debounceSearch = useDebounceFn(async () => {
         searchResults.value = []
         return
     }
-    const results = await $fetch(config.public.baseURL + 'mangas/searchbyname', {
+    const results = await $fetch(`${config.public.baseURL}mangas/searchbyname`, {
         method: 'POST',
         body: {
             s: searchQuery.value,
         },
     })
     console.log('search result:', results)
-    searchResults.value = results || []
+    searchResults.value = results as SearchResult[] || []
 
     dialogOpen.value = searchResults.value.length > 0
 

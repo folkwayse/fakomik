@@ -1,23 +1,24 @@
 <template>
   <div>
     <section class="lg:w-2/3 sm:w-full mx-auto py-8">
-      <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-4 p-4">
-        <div v-for="(item, index) in mangas" :key="index">
-          <NuxtLink class="bg-gray-800 p-2 rounded-lg text-center" :to="`/manga/${item.slug}`">
-            <NuxtImg v-if="item.poster" :src="makeItjetPack(item.poster)" :alt="item.title"
-              class="w-full h-48 object-cover rounded-lg mb-2" />
-            <div v-else class="w-full bg-gray-700 rounded-lg mb-2 flex items-center justify-center">
-              <i class="fas fa-image text-gray-500"></i>
+      <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-4 p-4 ">
+        <div v-for="(item, index) in mangas" :key="index" class="flex flex-col relative h-[170px] md:h-[300px]">
+          <div class="absolute inset-0  rounded-xl bg-gray-700"
+            :style="{ 'background-image': `url(${makeItjetPack(item.poster)})` }"
+            style="background-size: cover; background-position: center"></div>
+          <NuxtLink class="bg-gray-800 p-2 rounded-lg" :to="`/manga/${item.slug}`">
+            <div class="absolute bottom-0 inset-x-0 bg-black bg-opacity-50 p-2 text-white">
+              <div class="text-left text-xs overflow-hidden overflow-ellipsis line-clamp-1">
+                {{ item.title }}
+              </div>
+              <div class="text-gray-400 text-left text-xs">
+                <NuxtLink v-for="(item, index) in item.chapter" :key="index" :to="`/chapters/${item.slug}`">
+                  Ch. {{ item.chapter_number }},
+                </NuxtLink>
+              </div>
             </div>
-            <div class="text-white text-left text-s overflow-hidden overflow-ellipsis line-clamp-2">
-              {{ item.title }}
-            </div>
+
           </NuxtLink>
-          <div class="text-gray-400 text-left" v-for="(item, index) in item.chapter">
-            <NuxtLink :to="`/chapters/${item.slug}`">
-              Ch. {{ item.chapter_number }}
-            </NuxtLink>
-          </div>
         </div>
       </div>
     </section>
