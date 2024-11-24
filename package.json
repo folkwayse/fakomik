@@ -11,6 +11,7 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@iconify/utils": "^2.1.33",
     "@nuxt/fonts": "^0.7.0",
     "@nuxt/icon": "^1.5.7",
     "@nuxt/image": "^1.7.0",
