@@ -31,27 +31,7 @@
           </NuxtLink>
         </div>
 
-        <Sheet>
-          <SheetTrigger as-child>
-            <Icon name="mdi:menu" class="h-6 w-6" />
-          </SheetTrigger>
-          <SheetContent side="right">
-            <SheetHeader>
-              <NuxtLink to="/">
-                <SheetTitle>
-                  {{ config.public.siteName }}
-                </SheetTitle>
-              </NuxtLink>
-            </SheetHeader>
-            <div class="grid gap-4 py-4">
-              <NuxtLink v-for="item in items" :key="item.link" :to="item.link" @click="closeMenu"
-                class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">
-                {{ item.label }}
-              </NuxtLink>
-            </div>
 
-          </SheetContent>
-        </Sheet>
 
       </div>
     </div>

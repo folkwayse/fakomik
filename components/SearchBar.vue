@@ -12,33 +12,7 @@
                     placeholder="Cari Manga" type="search" @input="debounceSearch" />
             </div>
 
-            <Sheet v-model:open="dialogOpen" class="dark">
-                <SheetTrigger as-child></SheetTrigger>
-                <SheetContent side="bottom" class="bg-gray-800">
-                    <SheetHeader>
-                        <SheetTitle class="text-white">Inikah yang anda cari ? </SheetTitle>
-                        <SheetDescription class="text-white">
 
-                            <div v-if="searchResults.length > 0" v-for="item in searchResults">
-                                <NuxtLink :to="`/manga/${item.slug}`" @click="dialogOpen = false">
-                                    <div class="flex justify-start items-center p-4 hover:bg-gray-700">
-                                        <NuxtImg alt="Manga Cover" :src="makeItjetPack(item.poster, 50)"></NuxtImg>
-                                        <div class="ml-4">
-                                            <Label class="text-white text-left">
-                                                {{ item.title }} ({{ item.type }})
-                                            </Label>
-                                        </div>
-                                    </div>
-
-
-                                </NuxtLink>
-                            </div>
-
-
-                        </SheetDescription>
-                    </SheetHeader>
-                </SheetContent>
-            </Sheet>
         </div>
     </div>
 </template>
@@ -55,9 +29,8 @@ const config = useRuntimeConfig()
 const searchQuery = ref('')
 const searchResults = ref<SearchResult[]>([])
 const dialogOpen = ref(false)
-import { useToast } from '@/components/ui/toast/use-toast'
 
-const { toast } = useToast()
+
 const debounceSearch = useDebounceFn(async () => {
     if (!searchQuery.value.trim()) {
         searchResults.value = []
